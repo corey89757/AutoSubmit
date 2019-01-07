@@ -1,0 +1,659 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Query</title>
+    <link rel="stylesheet" href="/bundles/myappmusic/lib/font-awesome-4.2.0/css/font-awesome.min.css"  type="text/css" />
+    <link rel="stylesheet" href="/bundles/myappmusic/css/lib/jquery-ui.min.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/lib/jquery.ui.theme.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/common/common.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/common/headband.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/common/footer.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/common/action.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/menu/main.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/menu/choix_music.css" type="text/css" media="all"/>
+    <link rel="shortcut icon" href="/bundles/myappmusic/css/images/icone.ico"/>
+
+    <link rel="stylesheet" href="/bundles/myappmusic/css/entity/common.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/lib/dataTable.1.9.4.css" type="text/css" media="all"/>
+
+    <link rel="stylesheet" href="/bundles/myappmusic/css/entity/pdb.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/entity/mutfile.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/entity/mutfileData.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/bundles/myappmusic/css/entity/queryCreate.css" type="text/css" media="all"/>
+    <script src="/bundles/bazingajstranslation/js/translator.min.js"></script>
+    <script src="https://soft.dezyme.com/translations?locales=en"></script>
+    <script src="/bundles/myappmusic/js/lib/jquery-1.10.1.min.js"></script>
+    <script src="/bundles/myappmusic/js/lib/jquery-ui-1.10.3.min.js"></script>
+
+    <script src="/bundles/myappmusic/lib/DataTables-1.10.7/media/js/jquery.dataTables.min.js"></script>
+    <script src="/bundles/myappmusic/lib/DataTables-1.10.7/media/js/dataTables.bootstrap.js"></script>
+    <script src="/bundles/myappmusic/lib/DataTables-1.10.7/media/js/dataTables.responsive.js"></script>
+    <script src="/bundles/myappmusic/lib/DataTables-1.10.7/media/js/dataTables.tableTools.js"></script>
+
+    <script src="/bundles/myappmusic/js/lib/jquery.blockUI.2.59.min.js"></script>
+    <script src="/bundles/myappmusic/js/entity/common.js"></script>
+    <script src="/bundles/myappmusic/js/effect/message.js"></script>
+
+</head>
+<body class="body">
+
+<div id="headband" class="body">
+	<span id="account">
+									<a href="/profile/">My Account</a>
+			<span class="separator">|</span>
+			<a href="/logout">Logout</a>
+			</span>
+</div>
+
+<div id="wrapper_site">
+    <a href="http://www.dezyme.com">
+        <div id="proteinMenu">&nbsp;</div>
+    </a>
+    <div id="wrapper_content">
+        <ul id="choix-music">
+            <li class="pop-music">
+                <a class="mutation-type " data-type="pop" href="/query/create/pop">PoPMuSiC</a>
+            </li>
+            <li class="hot-music">
+                <a class="mutation-type " data-type="hot" href="/query/create/hot">HoTMuSiC</a>
+            </li>
+
+            <li class="snp-music">
+                <a class="mutation-type selected" data-type="snp" href="/query/create/snp">SNPMuSiC</a>
+            </li>
+
+            <li class="soal-music">
+                <a title="Available soon" class="disabled mutation-type" data-type="soul" href="#">SoulMuSiC</a>
+            </li>
+
+            <li class="beat-music">
+                <a title="Available soon" class="disabled mutation-type" data-type="beat" href="#">BeatMuSiC</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <ul id="menu" class="menuConnect">
+            <li class="first">
+                <a class="" href="/">
+                    Software
+                </a>
+            </li>
+
+            <li class="first">
+                <a class="" href="#">
+                    My Data
+                </a>
+                <ul class="sub">
+                    <li>
+                        <a class="fly " href="/mutfile/list">
+                            Mutation files
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="selected" href="#">
+                    Query
+                </a>
+                <ul class="sub">
+                    <li>
+                        <a class="fly" href="/query/create/pop">
+                            PoP
+                        </a>
+                    </li>
+                    <li>
+                        <a class="fly" href="/query/create/hot">
+                            HoT
+                        </a>
+                    </li>
+                    <li>
+                        <a class="fly" href="/query/create/snp">
+                            SNP
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="" href="/result/list">
+                    Results
+                </a>
+            </li>
+            <li>
+                <a class="" href="/help">
+                    Help
+                </a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div id="content">
+            <div id="all-step">
+                <fieldset id="pdbType">
+                    <legend>Select PDB file</legend>
+                    <div id="choicePdb">
+                        <input id="pdbPublicChoice" name="choicepdb" type="radio" value="Public" checked="checked" />Public&nbsp;
+                    </div>
+                    <div id="pdbPublicScreen">
+                        <form action="/pdb/search" method="post" >
+                            <div>
+		<span><div id="PdbSearchForm" >
+	<input type="text" id="PdbSearchForm_name" name="PdbSearchForm[name]" required="required" />
+<input type="hidden" id="PdbSearchForm__token" name="PdbSearchForm[_token]" value="1e9cca8909dd75c6fc9074c1522e0efc7fd67af1" /></div></span>
+                                <span class="exemple">(ex: 1BTK)</span>
+                            </div>
+                            <input type="submit" value="Search" class="submit"/>
+
+                        </form>
+                    </div>
+                    <div class="content"></div>
+                </fieldset>
+                <fieldset>
+                    <legend>Select Mode</legend>
+                    <div id="modes">
+                        <input type="radio" id="modeSyst" name="mode" value="syst" disabled="disabled"/><label for="modeSyst">Systematic</label>
+                        <input type="radio" id="modeFile" name="mode" value="file" disabled="disabled"/><label for="modeFile">File</label>
+                        <input type="radio" id="modeMult" name="mode" value="mult" disabled="disabled"/><label for="modeMult">Manual</label>
+                    </div>
+                </fieldset>
+                <fieldset id="modeFileType">
+                    <legend>Select Mutation file</legend>
+                    <div class="content"></div>
+                </fieldset>
+                <fieldset id="modeMultType">
+                    <legend>Make Mutation file</legend>
+                    <div class="content"></div>
+                </fieldset>
+                <fieldset id="process">
+                    <legend>Process Query</legend>
+                    <div style="color: #36AF8B; padding-bottom: 15px">Note that the computation usually takes from a few minutes to a few hours; for huge multi-chain proteins it can take up to a few days.</div>
+                    <form action="/query/build/snp" method="post" >
+                        <input type="hidden" id="queryProcessForm_pdbId" name="pdbId" value="0" />
+                        <input type="hidden" id="queryProcessForm_mutfileId" name="mutfileId" value="0" />
+                        <div id="queryProcessForm" ><input type="hidden" id="queryProcessForm_mode" name="queryProcessForm[mode]" value="syst" /><input type="hidden" id="queryProcessForm__token" name="queryProcessForm[_token]" value="01436e78454db097295b9dd334e7b99e745ae96d" /></div>
+                        <input type="submit" value="Go" class="disabled"/>
+                    </form>
+                </fieldset>
+            </div>
+
+            <script>
+                var idTempMutfile = 0;
+                var tempMode = "syst";
+
+                function cleanFormPublic() {
+                    $('#pdbPublicScreen').find('form').submit(function () {
+                        return false;
+                    });
+                }
+
+                function queryCleanElement(element)
+                {
+                    if (element == 'pdb'){
+                        $("#pdbPrivateType").hide();
+                        $('#pdbType').find('.content').remove();
+                        $('#queryProcessForm_pdbId').val("");
+                    }
+                    $("#modeSyst").prop('checked', true);
+                    $("#modes").find("input").attr('disabled', 'disabled');
+                    $('#modeFileType').hide();
+                    $('#modeMultType').hide();
+                    $('#queryProcessForm_mutfileId').val("");
+                    $("#noTM").prop('checked',true).attr('disabled', 'disabled');
+                    $("#TM").attr('disabled', 'disabled');
+                    $("#choiceTm").hide().find("input").attr('disabled', 'disabled');
+                    $('#tmValue').val("");
+                    $("#noSolubility").prop('checked',true).attr('disabled', 'disabled');
+                    $("#solubility").attr('disabled', 'disabled');
+                    $("#choiceSolubility").hide().find("input").attr('disabled', 'disabled');
+                    $('#solubilityValue').val("");
+                    $('#process').find('input:submit').removeClass('submit').addClass('disabled');
+                    $("#queryProcessForm_mode").val('syst');
+                }
+
+                function queryChoicePdb(id, isPrivate)
+                {
+                    var $pdbPublicChoice = $("#pdbPublicChoice");
+                    var $pdbPrivateChoice = $("#pdbPrivateChoice");
+                    $pdbPublicChoice.click(function () {
+                        queryCleanElement('pdb');
+                        removeMessageFlash();
+                        $("#pdbPublicScreen").show();
+                    });
+                    $pdbPrivateChoice.click(function () {
+                        queryCleanElement('pdb');
+                        removeMessageFlash();
+                        $("#pdbPublicScreen").hide();
+                        queryLoadPdb();
+                    });
+
+                    if (id > 0) {
+                        if (isPrivate){
+                            $pdbPrivateChoice.prop('checked', true);
+                            $("#pdbPublicScreen").hide();
+                        }
+
+                        queryLoadPdb(id);
+                    }
+                }
+
+                function querySearchPdb()
+                {
+                    $("#pdbPublicScreen").find(".submit").click(function () {
+                        queryCleanElement('mode');
+                        removeMessageFlash();
+
+                        var $form = $(this).closest('form');
+
+                        getLoadingBlock();
+
+                        $.ajax({
+                            type: "POST",
+                            url: $form.attr('action') + ".json",
+                            data: $form.serialize(),
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.error) {
+                                    $('#pdbPublicScreen').find('input:last').after("<div id='messageFlash'><span class='flash-error'>" + data.error + "</span></div>");
+                                    removeLoadingBlock();
+                                } else {
+                                    queryLoadPdb(data.pdbId);
+                                }
+                            }
+                        });
+
+                        return false;
+                    });
+                }
+
+                function queryLoadPdb(id)
+                {
+                    getLoadingBlock();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/pdb/list" + (id ? "/" + id : ''), 			success: function (data) {
+                            if (data != "") {
+                                var $pdbType = $('#pdbType');
+                                $pdbType.find('.content').remove();
+                                $pdbType.append('<div class="content">' + data + '</div>');
+                                querySelectPdb(id);
+                            }
+                        },
+                        complete: function () {
+                            removeLoadingBlock();
+                        }
+                    });
+                }
+
+                function querySelectPdb(id)
+                {
+                    var $pdbs = $('.pdb');
+                    var $pdb = $('#pdb_' + id);
+                    $pdbs.removeClass("pdbSelected");
+                    $pdb.addClass("pdbSelected");
+                    $pdb.find('input:radio').prop('checked', true);
+                    $('#queryProcessForm_pdbId').val(id);
+                    activeGo();
+                    queryEnabledMode();
+
+                    $pdbs.click(function () {
+                        queryCleanElement("mode");
+                        removeMessageFlash();
+
+                        $('.pdb').removeClass("pdbSelected");
+                        $(this).addClass("pdbSelected");
+                        $(this).find('input:radio').prop('checked', true);						var temp = $(this).attr('id').split('_');
+                        $('#queryProcessForm_pdbId').val(temp[1]);
+                        activeGo();
+                        queryEnabledMode();
+                    });
+
+                    initDataTable('pdb', function(){}, []);
+                }
+
+                function queryLoadInterfacesPdb(id)
+                {
+                    getLoadingBlock();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/pdb/interfaces" + (id ? "/" + id : ''), 			success: function (data) {
+                            if (data != "") {
+                                var $choiceInterfaces = $('#choiceInterfaces');
+                                $choiceInterfaces.find('.content').remove();
+                                var content = '<ul>';
+                                var nbrInterfaces = data.length;
+                                for (var i = 0; i < nbrInterfaces; i++){
+                                    content += '<li><input type="checkbox" name="choice_interfaces" value="'+data[i]+'" class="interface-checkbox">'+data[i]+'</li>';
+                                }
+                                content += '</ul>';
+
+                                $choiceInterfaces.append('<div class="content">' + content + '</div>');
+
+                                desactiveGo();
+
+                                initInterfacesValueAction();
+                            }
+                        },
+                        complete: function () {
+                            removeLoadingBlock();
+                        }
+                    });
+                }
+
+
+                function initModeAction(){
+                    $('#modeSyst').click(function () {
+                        $('#modeFileType').hide();
+                        $('#modeMultType').hide();
+                        $('#queryProcessForm_mode').val('syst');
+                        activeGo();
+                    });
+                    $('#modeFile').click(function () {
+                        $('#modeFileType').show();
+                        $('#modeMultType').hide();
+                        $('#queryProcessForm_mode').val('file');
+                        desactiveGo();
+                        queryLoadFileMode();
+                    });
+                    $('#modeMult').click(function () {
+                        $('#modeFileType').hide();
+                        $('#modeMultType').show();
+                        $('#queryProcessForm_mode').val('mult');
+                        desactiveGo();
+                        queryLoadMultMode();
+                    });
+                }
+
+
+                function queryEnabledMode() {
+                    var $pdb = $('#queryProcessForm_pdbId');
+                    if ($pdb.val() != "" && $pdb.val() != 0) {
+                        $('#modes').find('input').removeAttr('disabled');
+                        $('#modeSyst').prop('checked', true);
+                        $('#modesTM').find('input').removeAttr('disabled');
+                        $('#modesSolubility').find('input').removeAttr('disabled');
+                        queryChoiceType(tempMode);
+                        tempMode = "syst";
+                    }
+                }
+
+                function queryChoiceType(mode) {
+                    if (mode == "syst") {
+                        $('#modeSyst').click();
+                    }
+                    if (mode == "file" || mode == "mult") {
+                        $('#modeFile').click();
+                    }
+                }
+
+                function queryLoadFileMode() {
+                    getLoadingBlock();
+
+                    $('#modeFileType').find('.content').remove();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/mutfile/list/" + $('#queryProcessForm_pdbId').val(),
+                        success: function (data) {
+                            if (data != "") {
+                                var $modeFileType = $('#modeFileType');
+                                $modeFileType.find('.content').remove();
+
+                                $modeFileType.append('<div class="content">' + data + '</div>');
+                                querySelectMutfileFile();
+                            }
+                        },
+                        complete: function () {
+                            removeLoadingBlock();
+                        }
+                    });
+                }
+
+                function querySelectMutfileFile() {
+                    var $mutfiles = $('.mutfile');
+                    $mutfiles.click(function () {
+                        $('.mutfile').removeClass("mutfileSelected");
+                        $(this).addClass("mutfileSelected");
+                        $(this).find('input:radio').prop('checked', true);
+                        activeGo();
+                        var temp = $(this).attr('id').split('_');
+                        $('#queryProcessForm_mutfileId').val(temp[1]);
+                    });
+
+                    if (idTempMutfile != 0) {
+                        $mutfiles.each(function () {
+                            var temp = $(this).attr('id').split('_');
+
+                            if (temp[1] == idTempMutfile) {
+                                $('.mutfile').removeClass("mutfileSelected");
+                                $(this).addClass("mutfileSelected");
+                                activeGo();
+                                $('#mutfile_' + idTempMutfile).find('input:radio').prop('checked', true);
+                                $('#queryProcessForm_mutfileId').val(idTempMutfile);
+
+                                idTempMutfile = 0;
+                            }
+                        });
+                    }
+
+                    initDataTable('mutfile', function(){}, []);
+                }
+
+
+                function initMultModeForm(){
+                    cleanForm('mutfileTitle');
+                    editNameInit('mutfileTitle');
+                    mutfileDataInitDeleteAndAdd();
+                    querySaveMutfileForMultMode();
+                    initAutoCompletes('/pdb/residue_names', '/pdb/aanatural_names', '/pdb/aamutant_names', $('#queryProcessForm_pdbId').val());
+                    initOnChange();
+                }
+
+                function queryLoadMultMode() {
+                    getLoadingBlock();
+
+                    $('#modeMultType').find('.content').remove();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/mutfile/add/" + $('#queryProcessForm_pdbId').val(),
+                        success: function (data) {
+                            if (data != "") {
+                                $('#modeMultType').append('<div class="content">' + data + '</div>');
+                                initMultModeForm();
+                                $('#mutfileForm_name').val('');
+                                $('.mutfileTitle .name').click(); 				}
+                        },
+                        complete: function () {
+                            removeLoadingBlock();
+                        }
+                    });
+                }
+
+                function querySaveMutfileForMultMode()
+                {
+                    var $modeMultType = $('#modeMultType');
+
+                    $modeMultType.find('form:last').submit(function ()
+                    {
+                        var $formMult = $(this);
+
+                        getLoadingBlock();
+                        removeValid();
+
+                        $.ajax({
+                            type: "POST",
+                            url: $formMult.attr('action'),
+                            data: $formMult.serialize(),
+                            success: function (data) {
+                                if (data != "") {
+                                    $modeMultType.find('.content').remove();
+                                    $modeMultType.append('<div class="content">' + data + '</div>');
+
+                                    if ($modeMultType.find('.item-error').length == 0) {
+                                        $modeMultType.find('input:last').after('<img id="mutfileDataValid" class="valid" src="/bundles/myappmusic/css/images/valid.png" alt="Valid" title="Valid">');
+                                        activeGo();
+                                        $('#queryProcessForm_mutfileId').val($('#modeMultType').find('#mutfile_id').text());
+                                    }
+
+                                    initMultModeForm();
+                                }
+                            },
+                            complete: function () {
+                                removeLoadingBlock();
+                            }
+                        });
+
+                        return false;
+                    });
+                }
+
+
+                function initModeTM(tm)
+                {
+                    var $tm = $("#TM");
+                    var $choiceTm = $("#choiceTm");
+                    var $tmValue = $('#tmValue');
+                    var $noTM = $("#noTM");
+
+                    $noTM.click(function () {
+                        $choiceTm.hide();
+                        $tmValue.hide();
+                        activeGo();
+                    });
+                    $tm.click(function () {
+                        $tmValue.show().prop('disabled', false).val('');
+                        $choiceTm.show();
+                        desactiveGo();
+                    });
+
+                    if (tm == ""){
+                        $noTM.prop('checked', true).trigger('click');
+
+                    } else {
+                        $tm.prop('checked', true).trigger('click');
+                        $tmValue.val(tm);
+                        $('#queryProcessForm_tm').val(tm);
+
+                    }
+                }
+
+                function initTmValueAction()
+                {
+                    $("#tmValue").keyup(function(){
+                        var $this = $(this);
+                        if (parseFloat($this.val()) == $this.val() && $this.val() >= 273 && $this.val() <= 413){
+                            $('#queryProcessForm_tm').val($this.val());
+                            $this.removeClass('input-error');
+                            activeGo();
+                        } else {
+                            $('#queryProcessForm_tm').val(""); 				$this.addClass('input-error');
+                            desactiveGo();
+                        }
+                    });
+                }
+
+
+                function initSolubility(solubility)
+                {
+                    var $solubility = $("#solubility");
+                    var $choiceSolubility = $("#choiceSolubility");
+                    var $solubilityValue = $('#solubilityValue');
+                    var $noSolubility = $("#noSolubility");
+
+                    $noSolubility.click(function () {
+                        $choiceSolubility.hide();
+                        $solubilityValue.hide();
+                        activeGo();
+                    });
+                    $solubility.click(function () {
+                        $solubilityValue.show().prop('disabled', false).val('');
+                        $choiceSolubility.show();
+                        desactiveGo();
+                    });
+
+                    if (solubility == ""){
+                        $noSolubility.prop('checked', true).trigger('click');
+
+                    } else {
+                        $solubility.prop('checked', true).trigger('click');
+                        $solubilityValue.val(solubility);
+                        $('#queryProcessForm_solubility').val(solubility);
+
+                    }
+                }
+
+                function initSolubilityValueAction()
+                {
+                    $("#solubilityValue").keyup(function(){
+                        var $this = $(this);
+                        if (parseInt($this.val()) == $this.val() && $this.val() >= 0 && $this.val() <= 100){
+                            $('#queryProcessForm_solubility').val($this.val());
+                            $this.removeClass('input-error');
+                            activeGo();
+                        } else {
+                            $('#queryProcessForm_solubility').val(""); 				$this.addClass('input-error');
+                            desactiveGo();
+                        }
+                    });
+                }
+
+                function initInterfacesValueAction()
+                {
+                    $(".interface-checkbox").unbind('click').click(function(){
+
+                        var interfaces = [];
+                        $(".interface-checkbox:checked").each(function(){
+                            interfaces.push($(this).val());
+                        });
+
+                        $('#queryProcessForm_interfaces').val(interfaces);
+
+                        if (interfaces.length){
+                            activeGo();
+                        } else {
+                            desactiveGo();
+                        }
+                    });
+                }
+
+                function queryCheckProcessToExec() {
+
+                    $('#process').find("input:submit").click(function () {
+                        if (!$(this).hasClass('submit')){
+                            return false;
+                        }
+
+                        getLoadingBlock();
+                    });
+                }
+
+                $(document).ready(function () {
+                    cleanFormPublic();
+                    queryCleanElement('pdb');
+                    cleanForm('query');
+                    queryChoicePdb("0", false);
+                    querySearchPdb();
+                    initModeAction();
+
+
+                    queryCheckProcessToExec();
+                });
+            </script>
+
+            <script src="/bundles/myappmusic/js/entity/mutfileData.js"></script>
+        </div>
+        <!--<div id="proteinBottom">&nbsp;</div>-->
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div id="footer">
+    <p>3bio - av. Franklin Roosevelt, 50 CP 165/61 - 1050 Ixelles -		<a href="mailto:support@dezyme.com">support@dezyme.com</a>
+    </p>
+    <p>Tel. : +32 (2) 650 36 15 - Fax. : +32 (2) 650 35 75 - <a href="/bundles/myappmusic/file/General_conditions.pdf" title="Terms of use">Terms of use</a> - Revision: 202</p>
+    <p>Copyright 2014 - Dezyme - All right reserved</p>
+</div>
+
+
+</body>
+</html>
