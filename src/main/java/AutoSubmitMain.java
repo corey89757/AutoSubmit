@@ -4,15 +4,26 @@ import cn.hutool.http.HttpResponse;
 import cn.hutool.json.JSONUtil;
 
 import java.net.HttpCookie;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AutoSubmitMain {
 
-    public static void main(String[] args) {
-        String pdbName = "4IYP";//2xpg
+    public static List<String> fileList = new ArrayList<String>();
+    static{
+        fileList.add("1saw");
 
+    }
+
+    public static void main(String[] args) {
+        for(int i=0,count = fileList.size();i<count;i++){
+            autoSubmit(fileList.get(i));
+        }
+    }
+
+    private static void autoSubmit(String pdbName) {//"1i1n";//2xpg
         /**get token and cookid**/
         HttpResponse httpResponse = HttpRequest.get("https://soft.dezyme.com/login").execute();
 
@@ -54,7 +65,7 @@ public class AutoSubmitMain {
         httpResponse = HttpRequest.get("https://soft.dezyme.com/query/create/snp")
                 .header("Cookie", cookieName + "=" + cookieValue)
                 .execute();
-        System.out.println(httpResponse.body());
+//        System.out.println(httpResponse.body());
         String pdbSearchFormToken = StrUtil.subAfter(httpResponse.body(), "name=\"PdbSearchForm[_token]\" value=\"", false);
         pdbSearchFormToken = StrUtil.subBefore(pdbSearchFormToken, "\" /></div></span>", false);
         System.out.println("pdbSearchFormToken : " + pdbSearchFormToken);
@@ -71,7 +82,7 @@ public class AutoSubmitMain {
                 .header("Cookie", cookieName + "=" + cookieValue)
                 .form(hashMap)
                 .execute();
-        System.out.println(httpResponse.body());
+//        System.out.println(httpResponse.body());
         String pdbId = JSONUtil.parseObj(httpResponse.body()).getStr("pdbId");
         System.out.println("pdbId : " + pdbId);
 
@@ -98,7 +109,7 @@ public class AutoSubmitMain {
                 .form(hashMap)
                 .timeout(30000)
                 .execute();
-        System.out.println(httpResponse.body());
+//        System.out.println(httpResponse.body());
 
         /**list**//*
         httpResponse = HttpRequest.post("https://soft.dezyme.com/result/list")
@@ -114,7 +125,6 @@ public class AutoSubmitMain {
                 .timeout(30000)
                 .execute();
         System.out.println(httpResponse.body());*/
-
     }
 
 
